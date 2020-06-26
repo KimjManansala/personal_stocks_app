@@ -1,15 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View, AppRegistry } from "react-native";
+import { StyleSheet, Text, View, ImageBackground} from "react-native";
 import { NativeRouter, Route, Link } from "react-router-native";
 import { Provider } from 'react-redux';
 import configureStore from './configureStore';
 import Navbar from './views/Navbar/Navbar';
+import HomePage from './views/HomePage/HomePage';
+import AboutPage from './views/About/AboutPage'
 
 const store = configureStore();
 
-const Home = () => <Text style={styles.header}>Home</Text>;
+// const Home = () => <Text style={styles.header}>Home</Text>;
 
-const About = () => <Text style={styles.header}>About</Text>;
+// const About = () => <Text style={styles.header}>About</Text>;
 
 const Topic = ({ match }) => (
     <Text style={styles.topic}>{match.params.topicId}</Text>
@@ -57,12 +59,14 @@ export default function App() {
     return (
         <Provider store={store}>
             <NativeRouter>
-                <View style={styles.container}>
-                    <Navbar />
-                    <Route exact path="/" component={Home} />
-                    <Route path="/about" component={About} />
-                    <Route path="/topics" component={Topics} />
-                </View>
+                <ImageBackground source={require('./assets/background_mountain.jpg')} style={styles.backgroundImage}>
+                    <View style={styles.container}>
+                        <Navbar />
+                        <Route exact path="/" component={HomePage} />
+                        <Route path="/about" component={AboutPage} />
+                        <Route path="/topics" component={Topics} />
+                    </View>
+                </ImageBackground>
             </NativeRouter>
         </Provider>
     );
@@ -91,5 +95,9 @@ const styles = StyleSheet.create({
     topic: {
         textAlign: "center",
         fontSize: 15
+    },
+    backgroundImage: {
+        flex: 1,
+        resizeMode: "cover",
     }
 });

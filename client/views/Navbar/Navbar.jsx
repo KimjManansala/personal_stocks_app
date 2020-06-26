@@ -10,7 +10,7 @@ const Navbar = () => {
                 underlayColor="#f0f4f7"
                 style={styles.navItem}
             >
-                <Text>Home!</Text>
+                <Text>Home</Text>
             </Link>
             <Link
                 to="/about"
