@@ -57,17 +57,11 @@ const Topics = ({ match }) => (
 );
 export default class App extends React.Component {
     componentDidMount() {
-        console.log('hello')
-        alert('Hello')
         axios.get('http://localhost:3000/users')
-            .then(res => {
-                alert('hello passewd')
-                console.log(res)
-            })
-            .catch(er => {
-                alert('failed')
-                console.log(er)
-            })
+        .then((res) => {
+            alert(res.data[1].message)
+            console.log(res.data)
+        })
     }
     render () {
         return (
