@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import { StyleSheet, Text, View, ImageBackground} from "react-native";
 import { NativeRouter, Route, Link } from "react-router-native";
 import { Provider } from 'react-redux';
@@ -54,22 +55,36 @@ const Topics = ({ match }) => (
         />
     </View>
 );
-
-export default function App() {
-    return (
-        <Provider store={store}>
-            <NativeRouter>
-                <ImageBackground source={require('./assets/background_mountain.jpg')} style={styles.backgroundImage}>
-                    <View style={styles.container}>
-                        <Navbar />
-                        <Route exact path="/" component={HomePage} />
-                        <Route path="/about" component={AboutPage} />
-                        <Route path="/topics" component={Topics} />
-                    </View>
-                </ImageBackground>
-            </NativeRouter>
-        </Provider>
-    );
+export default class App extends React.Component {
+    componentDidMount() {
+        console.log('hello')
+        alert('Hello')
+        axios.get('http://localhost:3000/users')
+            .then(res => {
+                alert('hello passewd')
+                console.log(res)
+            })
+            .catch(er => {
+                alert('failed')
+                console.log(er)
+            })
+    }
+    render () {
+        return (
+            <Provider store={store}>
+                <NativeRouter>
+                    <ImageBackground source={require('./assets/background_mountain.jpg')} style={styles.backgroundImage}>
+                        <View style={styles.container}>
+                            <Navbar />
+                            <Route exact path="/" component={HomePage} />
+                            <Route path="/about" component={AboutPage} />
+                            <Route path="/topics" component={Topics} />
+                        </View>
+                    </ImageBackground>
+                </NativeRouter>
+            </Provider>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
